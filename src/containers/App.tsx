@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useService, useMachine } from "@xstate/react";
 import { makeStyles } from "@material-ui/core";
@@ -34,6 +34,15 @@ const App: React.FC = () => {
   const [, , snackbarService] = useMachine(snackbarMachine);
 
   const [, , bankAccountsService] = useMachine(bankAccountsMachine);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      window.location.assign("https://www.google.com");
+    }, 5000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   const isLoggedIn =
     authState.matches("authorized") ||

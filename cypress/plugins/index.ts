@@ -68,7 +68,7 @@ export default (on, config) => {
     },
 
     wait() {
-      childProcess.execSync("sleep 5s");
+      childProcess.execSync("sleep 20s");
       return null;
     },
   });
