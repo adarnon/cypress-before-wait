@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import Promise from "bluebird";
 import { percyHealthCheck } from "@percy/cypress/task";
 import codeCoverageTask from "@cypress/code-coverage/task";
+import childProcess from "child_process";
 
 dotenv.config({ path: ".env.local" });
 dotenv.config();
@@ -64,6 +65,11 @@ export default (on, config) => {
     },
     "find:database"(queryPayload) {
       return queryDatabase(queryPayload, (data, attrs) => _.find(data.results, attrs));
+    },
+
+    wait() {
+      childProcess.execSync("sleep 5s");
+      return null;
     },
   });
 
